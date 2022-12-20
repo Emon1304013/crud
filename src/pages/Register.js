@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../contexts/UserContext";
 
 const Register = () => {
-  const { createUser, updateUserProfile, googleSignIn , githubSignIn} =
+  const { createUser, updateUserProfile, googleSignIn , githubSignIn,loading,setLoading} =
     useContext(AuthContext);
 
   const [name, setName] = useState("");
@@ -83,12 +83,16 @@ const Register = () => {
         updateUserProfile(name)
         .then(() => {
           toast.success("Registration successfull");
+          setLoading(false);
+          navigate('/profile')
+          
         });
       })
 
       .catch((error) => {
         const errorMessage = error.message;
         toast.error(errorMessage);
+        setLoading(false);
       });
   };
 
@@ -217,7 +221,7 @@ const Register = () => {
                 type="submit"
                 className="w-full px-8 py-3 font-semibold rounded-md bg-purple-500 hover:bg-cyan-700 hover:text-white text-gray-100"
               >
-                Sign Up
+                {loading ? 'Loading...':'SignUp'}
               </button>
             </div>
           </div>

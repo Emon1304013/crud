@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../contexts/UserContext";
 
 const Login = () => {
-  const { userLogin, googleSignIn, resetPass, setLoading, githubSignIn} =
+  const { userLogin, googleSignIn, resetPass, setLoading, githubSignIn,loading} =
   useContext(AuthContext);
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
@@ -33,19 +33,15 @@ const handleSubmit = (e) => {
     .then((result) => {
       const user = result.user;
       console.log(user);
-      // if (user.emailVerified) {
-      //   navigate(from, { replace: true });
-      //   toast.success("User Logged in successfully");
-      // } else {
-      //   toast.error("Your email is not verified. Please verify First");
-      //   e.target.reset();
-      // }
+      setLoading(false);
+      toast.success("User Logged in successfully");
       e.target.reset();
-      navigate(from, { replace: true });
+      navigate('/profile');
     })
     .catch((error) => {
       console.error(error);
       toast.error(error.message)
+      setLoading(false);
     })
     .finally(() => {
       setLoading(false);
@@ -106,6 +102,7 @@ const handleGithubSignIn = () =>{
           </p>
         </div>
         <form
+        onSubmit={handleSubmit}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -125,7 +122,7 @@ const handleGithubSignIn = () =>{
                 data-temp-mail-org="0"
               />
             </div>
-            <p className="text-red-600 text-center"></p>
+            <p className="text-red-600 text-center">{emailError}</p>
             <div>
               <div className="flex justify-between">
                 <label htmlFor="password" className="text-sm mb-2">
@@ -141,7 +138,9 @@ const handleGithubSignIn = () =>{
                   placeholder="*******"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:border-gray-900 text-gray-900"
                 />
-                <span className="absolute right-4 cursor-pointer">
+                <span
+                onClick={handleShowPass}
+                className="absolute right-4 cursor-pointer">
                   <FaEye></FaEye>
                 </span>
               </div>
@@ -150,10 +149,11 @@ const handleGithubSignIn = () =>{
 
           <div>
             <button
+
               type="submit"
               className="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
             >
-              Sign in
+             {loading? 'Loading...':' Sign in'}
             </button>
           </div>
         </form>

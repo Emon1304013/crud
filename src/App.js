@@ -5,6 +5,8 @@ import ErrorPage from './pages/ErrorPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Products from './pages/Products';
+import AddProduct from './pages/AddProduct';
 import MainLayout from './layouts/MainLayout';
 
 function App() {
@@ -29,7 +31,15 @@ function App() {
         {
           path:'/profile',
           element:<Profile></Profile>
-        }
+        },
+        {
+          path:'/products',
+          element:<Products></Products>
+        },
+        {
+          path:'/add-product',
+          element:<AddProduct></AddProduct>
+        },
       ]
     }
   ])
