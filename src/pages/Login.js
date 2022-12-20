@@ -120,6 +120,7 @@ const handleGithubSignIn = () =>{
                 placeholder="Enter Your Email Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:border-gray-900 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
+                required
               />
             </div>
             <p className="text-red-600 text-center">{emailError}</p>
@@ -137,6 +138,7 @@ const handleGithubSignIn = () =>{
                   id="password"
                   placeholder="*******"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:border-gray-900 text-gray-900"
+                  required
                 />
                 <span
                 onClick={handleShowPass}
@@ -151,7 +153,7 @@ const handleGithubSignIn = () =>{
             <button
 
               type="submit"
-              className="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+              className="w-full px-8 py-3 font-semibold rounded-md bg-purple-500 text-white"
             >
              {loading? 'Loading...':' Sign in'}
             </button>

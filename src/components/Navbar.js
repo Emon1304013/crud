@@ -1,28 +1,24 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../contexts/UserContext";
 
 const Navbar = () => {
   const { user, userSignOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
-    // console.log("User logged Out");
+
     userSignOut()
       .then(() => {
         toast.success("User Logged out");
+        navigate('/');
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
-  // const activeStyle = {
-  //   backgroundColor: "white",
-  //   color: "gray",
-  //   padding: "5px",
-  //   borderRadius: "5px",
-  // };
 
   return (
     <nav>

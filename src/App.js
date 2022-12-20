@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Products from './pages/Products';
 import AddProduct from './pages/AddProduct';
 import MainLayout from './layouts/MainLayout';
+import EditProduct from './pages/EditProduct';
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +40,11 @@ function App() {
         {
           path:'/add-product',
           element:<AddProduct></AddProduct>
+        },
+        {
+          path:'/product/edit/:id',
+          element:<EditProduct></EditProduct>,
+          loader:({params})=>fetch(`${process.env.REACT_APP_API_URL}/product/${params.id}`)
         },
       ]
     }
