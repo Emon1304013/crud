@@ -6,18 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import UserContext from './contexts/UserContext';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserContext>
-    <App />
+    <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </UserContext>
     <ToastContainer position="top-center" />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
