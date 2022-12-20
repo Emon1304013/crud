@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.init';
 export const AuthContext = createContext({});
 
@@ -17,16 +17,11 @@ const UserContext = ({children}) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
-    // Email Verification after user creation  
-    const verifyEmail = () => {
-        setLoading(true);
-        return sendEmailVerification(auth.currentUser)
-      }
 
-    const updateUserProfile = (name,photoURL) => {
+    const updateUserProfile = (name) => {
       setLoading(true);
       return updateProfile (auth.currentUser, {
-        displayName : name, photoURL: photoURL
+        displayName : name,
       })
     }
 
@@ -83,7 +78,6 @@ const UserContext = ({children}) => {
         loading,
         setLoading,
         createUser,
-        verifyEmail,
         updateUserProfile,
         googleSignIn,
         githubSignIn,
